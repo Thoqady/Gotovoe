@@ -1,0 +1,55 @@
+Sub CreateTables()
+    Dim numTables As Integer
+    Dim startCell As Range
+    Dim i As Integer
+    
+    ' Запрашиваем количество таблиц
+    numTables = InputBox("Введите количество таблиц:")
+    
+    ' Проверяем, чтобы было введено число больше 0
+    If numTables <= 0 Then
+        MsgBox "Неверное количество таблиц. Пожалуйста, введите положительное целое число."
+        Exit Sub
+    End If
+    
+    ' Запрашиваем ячейку, с которой начнется первая таблица
+    Set startCell = Application.InputBox("Выберите ячейку, с которой начнется первая таблица:", Type:=8)
+    
+    ' Создаем указанное количество таблиц
+    For i = 1 To numTables
+        CreateTable startCell.Offset((i - 1) * 9, 0)
+    Next i
+End Sub
+
+Sub CreateTable(startCell As Range)
+    Dim ws As Worksheet
+    Set ws = startCell.Worksheet
+    
+    ' Выставляем ширину столбцов A и B
+    ws.Columns("A:B").ColumnWidth = 24.57
+    
+    ' Выделяем диапазон с A1:B7 и выставляем рамки (все границы)
+    startCell.Resize(8, 2).Borders.LineStyle = xlContinuous
+    
+    ' Ставим размер шрифта для ячейки A1
+    startCell.Font.Size = 72
+    
+    ' Объединяем ячейки B1:B4
+    startCell.Offset(0, 1).Resize(4, 1).Merge
+    
+    ' Заполняем ячейки A2:A7 соответствующими текстами
+    startCell.Offset(1, 0).Value = "Проект - "
+    startCell.Offset(2, 0).Value = "Тип/подсистема - "
+    startCell.Offset(3, 0).Value = "Мнемоника /Ne - "
+    startCell.Offset(4, 0).Value = "Отв. подразделение - "
+    startCell.Offset(5, 0).Value = "Группа OPL  - "
+    startCell.Offset(6, 0).Value = "Руководитель  - "
+    startCell.Offset(7, 0).Value = "Отв. лицо - "
+    
+ ' Объединяем ячейки A5:B5, A6:B6, A7:B7
+    startCell.Offset(4, 0).Resize(1, 2).Merge
+    startCell.Offset(5, 0).Resize(1, 2).Merge
+    startCell.Offset(6, 0).Resize(1, 2).Merge
+    startCell.Offset(7, 0).Resize(1, 2).Merge
+End Sub
+
