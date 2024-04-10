@@ -1,3 +1,4 @@
+
 Sub CreateTables()
     Dim numTables As Integer
     Dim startCell As Range
@@ -26,13 +27,14 @@ Sub CreateTable(startCell As Range)
     Set ws = startCell.Worksheet
     
     ' Выставляем ширину столбцов A и B
-    ws.Columns("A:B").ColumnWidth = 24.57
+    ws.Columns("A:A").ColumnWidth = 24.33
+    ws.Columns("B:B").ColumnWidth = 24
     
     ' Выделяем диапазон с A1:B7 и выставляем рамки (все границы)
     startCell.Resize(8, 2).Borders.LineStyle = xlContinuous
     
     ' Ставим размер шрифта для ячейки A1
-    startCell.Font.Size = 72
+    startCell.Font.Size = 60
     
     ' Объединяем ячейки B1:B4
     startCell.Offset(0, 1).Resize(4, 1).Merge
@@ -51,5 +53,15 @@ Sub CreateTable(startCell As Range)
     startCell.Offset(5, 0).Resize(1, 2).Merge
     startCell.Offset(6, 0).Resize(1, 2).Merge
     startCell.Offset(7, 0).Resize(1, 2).Merge
+    
+    startCell.Offset.RowHeight = 94.7
+    startCell.Offset(1, 0).RowHeight = 14.4
+    startCell.Offset(2, 0).RowHeight = 14.4
+    startCell.Offset(3, 0).RowHeight = 14.4
+    startCell.Offset(4, 0).RowHeight = 14.4
+    startCell.Offset(5, 0).RowHeight = 14.4
+    startCell.Offset(6, 0).RowHeight = 14.4
+    startCell.Offset(7, 0).RowHeight = 14.4
+
 End Sub
 
