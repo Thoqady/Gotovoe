@@ -50,22 +50,22 @@ def create_excel_A7(entries, save_path):
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
             box_size=10,  # Устанавливаем размер каждого квадрата в QR-коде
-            border=4,
+            border=5,
         )
         qr.add_data(info)
         qr.make(fit=True)
         qr_img = qr.make_image(fill_color="black", back_color="white")
 
         # Переводим размеры QR-кода в пиксели (примерно 1 см = 37.795276 пикселя)
-        qr_width_pixels = int(4 * 42)
-        qr_height_pixels = int(4 * 42)
+        qr_width_pixels = int(9 * 37.795276)
+        qr_height_pixels = int(9 * 37.795276)
 
         # Сохраняем QR-код как изображение
         qr_img = qr_img.resize((qr_width_pixels, qr_height_pixels))
         qr_img.save(f'qr_code_{i+1}.png')
 
         # Вставляем изображение QR-кода в ячейку B1 посередине
-        worksheet.insert_image(f'B{row_A + 1}', f'qr_code_{i+1}.png', {'x_offset': 5, 'y_offset': 15})
+        worksheet.insert_image(f'B{row_A + 1}', f'qr_code_{i+1}.png', {'x_offset': 5, 'y_offset': 15, 'x_scale': 0.5, 'y_scale': 0.5})
 
     # Устанавливаем ширину столбцов
     worksheet.set_column('A:B', 24.57)
