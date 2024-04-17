@@ -1,0 +1,59 @@
+Sub РедактироватьТекст()
+    Dim текст As String
+    Dim последняяСтрока As Integer
+    Dim i As Integer
+    
+    ' Определение номера последней заполненной строки в столбце A
+    последняяСтрока = Cells(Rows.Count, 1).End(xlUp).Row
+    
+    ' Проход по каждой строке
+    For i = 2 To последняяСтрока
+        ' Получить данные из текущей строки
+        Dim отвЛицо As String
+        Dim руководитель As String
+        Dim контДежСмены As String
+        Dim ряд As String
+        Dim место As String
+        Dim телефонОтвЛица As String
+        Dim телефонРуководителя As String
+        Dim проект As String
+        Dim типПодсистема As String
+        Dim мнемоника As String
+        Dim группаОPL As String
+        Dim подразделение As String
+        
+        отвЛицо = Cells(i, 1).Value
+        руководитель = Cells(i, 2).Value
+        ряд = Cells(i, 3).Value
+        место = Cells(i, 4).Value
+        телефонОтвЛица = Cells(i, 5).Value
+        телефонРуководителя = Cells(i, 6).Value
+        проект = Cells(i, 8).Value
+        типПодсистема = Cells(i, 9).Value
+        мнемоника = Cells(i, 10).Value
+        группаОPL = Cells(i, 11).Value
+        подразделение = Cells(i, 12).Value
+        контДежСмены = Cells(i, 13).Value
+        
+        ' Формирование текста
+        текст = "Ряд " & ряд & " Место " & место & vbCrLf & _
+                "Тип/подсистема - " & типПодсистема & vbCrLf & _
+                "Мнемоника / NE - " & мнемоника & vbCrLf & _
+                "Проект - " & проект & vbCrLf & _
+                "Подразделение - " & подразделение & vbCrLf & _
+                "Отв.лицо - " & отвЛицо & " тел. " & телефонОтвЛица & vbCrLf & _
+                "Руководитель - " & руководитель & " тел. " & телефонРуководителя & vbCrLf & _
+                "Контакт деж. Смены - " & контДежСмены & vbCrLf & _
+                "Группа OPL - " & группаОPL
+        
+        ' Установка выравнивания по центру для всех ячеек
+        Range(Cells(i, 1), Cells(i, 14)).HorizontalAlignment = xlCenter
+        
+        ' Вставка текста в ячейку столбца N
+        Cells(i, 14).Value = текст
+        
+        ' Установка высоты строки
+        Rows(i).RowHeight = 20
+    Next i
+End Sub
+
